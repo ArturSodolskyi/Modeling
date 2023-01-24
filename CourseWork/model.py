@@ -8,7 +8,7 @@ class Model:
         self.tNext = 0.0
         self.tCurrent = self.tNext
 
-    def simulate(self, time):
+    def simulate(self, time, onlyTotalResults=False):
         while self.tCurrent < time:
             self.tNext = np.inf
             for item in self.list:
@@ -25,9 +25,9 @@ class Model:
                 item.tCurrent = self.tCurrent
                 if self.tCurrent == item.getTNext():
                     item.outAct()
-        self.printResult()
+        self.printResult(onlyTotalResults)
 
-    def printResult(self):
+    def printResult(self, onlyTotalResults):
         print()
         print('Results:')
 
@@ -42,8 +42,9 @@ class Model:
                 waitingTime = e.getMeanWaitingTime()
                 timeOfWork = e.getMeanTimeOfWork()
                 meanLoad = self.getMeanLoad(e)
-                e.printResult()
-                self.printData(waitingTime, timeOfWork, meanLoad)
+                if onlyTotalResults is False:
+                    e.printResult()
+                    self.printData(waitingTime, timeOfWork, meanLoad)
 
                 totalWaitingTime += waitingTime
                 totalTimeOfWork += timeOfWork
