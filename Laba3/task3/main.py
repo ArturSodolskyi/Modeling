@@ -88,7 +88,7 @@ def main():
                 laboratoryRegisterWay, laboratoryAnalysis, 
                 laboratoryRegistrationService, receptionWay, exit]
     model = Model(elements)
-    model.simulate(10000)
+    model.simulate(1000)
 
 
 if __name__ == "__main__":
